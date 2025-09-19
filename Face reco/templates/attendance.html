@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance</title>
+</head>
+<body>
+  <h2>Today's Attendance</h2>
+  <h3>Present</h3>
+  <table border="1">
+    <tr><th>ID</th><th>Name</th></tr>
+    {% for p in present %}
+      <tr><td>{{ p.student_id }}</td><td>{{ p.name }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <h3>Absent</h3>
+  <table border="1">
+    <tr><th>ID</th><th>Name</th></tr>
+    {% for a in absent %}
+      <tr><td>{{ a.student_id }}</td><td>{{ a.name }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <br><a href="{{ url_for('home') }}">Back</a>
+</body>
+</html>

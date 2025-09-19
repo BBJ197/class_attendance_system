@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Home</title>
+</head>
+<body>
+  <h2>Welcome Admin</h2>
+  <nav>
+    <a href="{{ url_for('register_page') }}">Register</a> |
+    <a href="{{ url_for('attendance_page') }}">Attendance</a> |
+    <a href="{{ url_for('notifications_page') }}">Notifications</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications</title>
+</head>
+<body>
+  <h2>Absence Alerts</h2>
+  {% if alerts %}
+    <ul>
+      {% for a in alerts %}
+        <li>{{ a.name }} has been absent {{ a.absences }} times!</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No alerts 🚀</p>
+  {% endif %}
+  <br><a href="{{ url_for('home') }}">Back</a>
+</body>
+</html>
