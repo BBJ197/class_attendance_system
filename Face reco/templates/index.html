@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Face Recognition Attendance</title>
+  <style>
+    #registerForm { display: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Face Recognition Attendance</h2>
+  
+  <div>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+  </div>
+  
+  <h3 id="status">Detecting...</h3>
+  
+  <div id="registerForm">
+    <h3>Register Unknown User</h3>
+    <input type="text" id="student_id" placeholder="Student ID" required><br>
+    <input type="text" id="name" placeholder="Full Name" required><br>
+    <button onclick="registerUnknown()">Register</button>
+  </div>
+
+  <script>
+    function checkStatus() {
+      fetch("/recognize_status")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("status").innerText = data.name;
+          if (data.name === "Unknown") {
+            document.getElementById("registerForm").style.display = "block";
+          } else {
+            document.getElementById("registerForm").style.display = "none";
+          }
+        });
+    }
+
+    setInterval(checkStatus, 1000);
+
+    function registerUnknown() {
+      const payload = {
+        student_id: document.getElementById("student_id").value,
+        name: document.getElementById("name").value
+      };
+
+      fetch("/register_unknown", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => alert(data.message))
+      .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>
